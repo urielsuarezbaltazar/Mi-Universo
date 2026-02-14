@@ -79,3 +79,14 @@ function createFloatingHearts(){
     container.appendChild(heart);
   }
 }
+
+/* Reiniciar historia */
+
+function restartStory(){
+  currentScene=1;
+  changeScene(1);
+
+  document.getElementById("floatingHearts").innerHTML="";
+  document.getElementById("impactHeart").style.opacity=0;
+  document.getElementById("astronaut").style.opacity=0;
+}
