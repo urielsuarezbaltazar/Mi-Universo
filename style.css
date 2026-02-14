@@ -2,10 +2,53 @@
 
 body{
   font-family: Arial, sans-serif;
-  background:black;
+  background: radial-gradient(circle at 20% 30%, #1a0033, #000814 40%, #000);
   color:white;
   overflow:hidden;
 }
+
+/* ===== FONDO ESPACIAL ===== */
+
+.stars{
+  position:fixed;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  z-index:0;
+}
+
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  border-radius:50%;
+  animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+  from{opacity:0.2}
+  to{opacity:1}
+}
+
+/* Galaxia */
+.galaxy{
+  position:absolute;
+  width:400px;
+  height:400px;
+  background: radial-gradient(circle, rgba(255,0,150,0.4), transparent 70%);
+  filter: blur(40px);
+  top:20%;
+  left:60%;
+  animation:rotate 120s linear infinite;
+}
+
+@keyframes rotate{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+/* ===== ESCENAS ===== */
 
 .scene{
   position:absolute;
@@ -17,15 +60,11 @@ body{
   text-align:center;
   opacity:0;
   transition:opacity 1s ease;
+  z-index:2;
 }
 
 .scene.active{
   opacity:1;
-  z-index:2;
-}
-
-h1,h2{
-  margin-bottom:20px;
 }
 
 .btn{
@@ -46,48 +85,34 @@ h1,h2{
   transform:scale(1.1);
 }
 
-/* Fondo estrellas */
-.stars{
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:transparent;
-  overflow:hidden;
-  z-index:0;
-}
+/* ===== ESTRELLA FUGAZ ===== */
 
-.stars::before{
-  content:"";
-  position:absolute;
-  width:200%;
-  height:200%;
-  background:
-    radial-gradient(white 1px, transparent 1px);
-  background-size:40px 40px;
-  animation:moveStars 60s linear infinite;
-  opacity:0.4;
-}
-
-@keyframes moveStars{
-  from{transform:translate(0,0);}
-  to{transform:translate(-50%, -50%);}
-}
-
-/* Estrella fugaz */
 .shooting-star{
   position:absolute;
-  width:4px;
-  height:4px;
-  background:white;
-  border-radius:50%;
-  box-shadow:0 0 10px white;
+  font-size:40px;
+  filter: drop-shadow(0 0 10px white);
 }
 
-/* Impacto corazón */
+.trail{
+  position:absolute;
+  width:150px;
+  height:2px;
+  background:linear-gradient(to right, white, transparent);
+  transform-origin:left;
+}
+
+/* ===== IMPACTO ===== */
+
 .impact-heart{
-  font-size:60px;
+  font-size:70px;
   opacity:0;
-  transition:1s;
+  transform:scale(0);
+  transition:0.8s ease;
+}
+
+.impact-heart.show{
+  opacity:1;
+  transform:scale(1.2);
 }
 
 .astronaut{
