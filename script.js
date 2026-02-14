@@ -2,7 +2,8 @@ let musicStarted=false;
 let noClicked=false;
 
 generateStars();
-createGalaxy();
+
+/* RESPUESTA */
 
 function answer(val){
   if(!val){
@@ -17,6 +18,8 @@ function answer(val){
     launchStar();
   }
 }
+
+/* MÚSICA */
 
 function startMusic(){
   if(!musicStarted){
@@ -35,6 +38,8 @@ function startMusic(){
   }
 }
 
+/* ESCENAS */
+
 function changeScene(num){
   document.querySelectorAll(".scene").forEach(s=>s.classList.remove("active"));
   document.getElementById("scene"+num).classList.add("active");
@@ -49,77 +54,91 @@ function nextScene(){
   }
 }
 
-/* ===== FONDO ===== */
+/* ESTRELLAS */
 
 function generateStars(){
   const starsContainer=document.querySelector(".stars");
-  for(let i=0;i<120;i++){
+  for(let i=0;i<70;i++){
     const star=document.createElement("div");
     star.className="star";
     star.style.top=Math.random()*100+"%";
     star.style.left=Math.random()*100+"%";
-    star.style.animationDuration=(1+Math.random()*3)+"s";
+    star.style.animationDuration=(1+Math.random()*2)+"s";
     starsContainer.appendChild(star);
   }
 }
 
-function createGalaxy(){
-  const galaxy=document.createElement("div");
-  galaxy.className="galaxy";
-  document.body.appendChild(galaxy);
-}
-
-/* ===== ESTRELLA FUGAZ ===== */
+/* ESTRELLA FUGAZ */
 
 function launchStar(){
+
   const star=document.createElement("div");
-  star.className="shooting-star";
   star.textContent="🌠";
+  star.style.position="absolute";
+  star.style.fontSize="40px";
+  star.style.left="-10%";
+  star.style.top="10%";
+  star.style.transition="transform 2s cubic-bezier(.25,.8,.25,1)";
 
-  const trail=document.createElement("div");
-  trail.className="trail";
-
-  star.style.left="100%";
-  star.style.top="0%";
-
-  document.body.appendChild(trail);
   document.body.appendChild(star);
 
-  star.animate([
-    {transform:"translate(0,0)"},
-    {transform:"translate(-50vw,50vh)"}
-  ],{duration:2000,easing:"ease-in"});
-
-  trail.animate([
-    {transform:"translate(100vw,0) rotate(45deg)"},
-    {transform:"translate(50vw,50vh) rotate(45deg)"}
-  ],{duration:2000,easing:"ease-in"});
+  setTimeout(()=>{
+    star.style.transform="translate(60vw,50vh)";
+  },50);
 
   setTimeout(()=>{
-    impact();
+    star.style.left="50%";
+    star.style.top="50%";
+    star.style.transform="translate(-50%,-50%) scale(1.2)";
   },2000);
+
+  setTimeout(()=>{
+    star.remove();
+    impact();
+  },2200);
 }
 
+/* IMPACTO */
+
 function impact(){
+
   const heart=document.getElementById("impactHeart");
-  heart.classList.add("show");
+
   heart.style.position="absolute";
   heart.style.top="50%";
   heart.style.left="50%";
-  heart.style.transform="translate(-50%,-50%) scale(1.2)";
+  heart.style.transform="translate(-50%,-50%) scale(0)";
+  heart.style.transition="all 0.6s ease";
+  heart.style.opacity="1";
+
+  setTimeout(()=>{
+    heart.style.transform="translate(-50%,-50%) scale(1.4)";
+  },100);
 
   document.getElementById("astronaut").style.opacity=1;
 }
 
-/* ===== CORAZONES ===== */
+/* CORAZONES ESCENA 3 */
 
 function createFloatingHearts(){
   const container=document.getElementById("floatingHearts");
-  for(let i=0;i<25;i++){
+
+  for(let i=0;i<15;i++){
     const heart=document.createElement("div");
     heart.textContent="💖";
+    heart.style.position="absolute";
     heart.style.left=Math.random()*100+"%";
-    heart.style.animationDuration=(4+Math.random()*4)+"s";
+    heart.style.bottom="-50px";
+    heart.style.fontSize="25px";
+    heart.style.transition="transform 6s linear";
     container.appendChild(heart);
+
+    setTimeout(()=>{
+      heart.style.transform="translateY(-120vh)";
+    },50);
+
+    setTimeout(()=>{
+      heart.remove();
+    },6000);
   }
 }
