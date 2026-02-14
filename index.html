@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mi Universo 💙</title>
+<title>Mi Universo</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<audio id="bgMusic" loop>
+<audio id="bgMusic" loop preload="auto">
   <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
@@ -19,28 +19,22 @@
 <section class="scene active" id="scene1">
   <h1>¿Quieres ser mi San Valentín?</h1>
   <div id="options">
-    <button class="btn no" onclick="answerNo()">No</button>
-    <button class="btn yes" onclick="answerYes()">Sí</button>
+    <button class="btn no" onclick="answer(false)">No</button>
+    <button class="btn yes" onclick="answer(true)">Sí</button>
   </div>
 </section>
 
 <!-- ESCENA 2 -->
 <section class="scene" id="scene2">
+  <div id="starContainer"></div>
+  <div id="impactHeart" class="impact-heart">💙</div>
 
-  <div id="shootingStar"></div>
-
-  <div id="impactHeart" class="heart-container">
-    💙
-  </div>
-
-  <div class="astronaut">
+  <div id="astronaut" class="astronaut">
     <img src="astronauta.png">
-    <div class="speech">
-      POEMA
-    </div>
+    <div class="speech">POEMA</div>
   </div>
 
-  <button class="btn next" onclick="nextScene()">Te Amo 💙</button>
+  <button class="btn next" onclick="nextScene()">Continuar</button>
 </section>
 
 <!-- ESCENA 3 -->
@@ -58,13 +52,14 @@
     Al día de hoy esos dos siguen juntos.<br>
     Feliz San Valentín mi Universo
   </h2>
-  <button class="btn next" onclick="nextScene()">Te Amo 💙</button>
 </section>
 
 <!-- ESCENA 5 -->
 <section class="scene" id="scene5">
-  <img src="ositos.gif" class="final-img">
-  <h2>Te amo mucho mi Yulissa 💙</h2>
+  <img src="ositos.gif" class="gif-final">
+  <h2 class="mensaje-final">
+    Te amo mucho mi Yulissita 🤍
+  </h2>
 </section>
 
 <script src="script.js"></script>
