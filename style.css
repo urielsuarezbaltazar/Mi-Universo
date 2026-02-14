@@ -1,4 +1,3 @@
-/* ===== RESET ===== */
 *{
   margin:0;
   padding:0;
@@ -6,14 +5,14 @@
 }
 
 body{
-  font-family:Arial, Helvetica, sans-serif;
+  font-family:Arial, sans-serif;
   background:radial-gradient(circle at top, #0d1b2a, #000814);
   overflow:hidden;
   color:white;
   text-align:center;
 }
 
-/* ===== ESTRELLAS ===== */
+/* Fondo estrellas */
 .stars{
   position:fixed;
   width:100%;
@@ -28,7 +27,6 @@ body{
   to{background-position:1000px 1000px;}
 }
 
-/* ===== ESCENAS ===== */
 .scene{
   position:absolute;
   width:100%;
@@ -45,7 +43,16 @@ body{
   display:flex;
 }
 
-/* ===== BOTONES ===== */
+h1{
+  font-size:26px;
+  margin-bottom:20px;
+}
+
+h2{
+  font-size:22px;
+  margin-top:20px;
+}
+
 .btn{
   margin-top:20px;
   padding:12px 25px;
@@ -58,62 +65,72 @@ body{
   z-index:5;
 }
 
-.btn.yes{
-  background:#00b4ff;
-  color:white;
-}
-
-.btn.no{
-  background:#ff4d6d;
-  color:white;
-}
-
-.btn.next{
-  background:#00b4ff;
-  color:white;
-}
+.btn.yes{ background:#00b4ff; color:white; }
+.btn.no{ background:#ff4d6d; color:white; }
+.btn.next{ background:#00b4ff; color:white; }
 
 .btn:hover{
   transform:scale(1.1);
 }
 
-/* ===== CORAZÓN AZUL CON FOTO ===== */
+/* Estrella fugaz */
+#shootingStar{
+  position:absolute;
+  width:4px;
+  height:4px;
+  background:white;
+  box-shadow:0 0 10px white;
+  opacity:0;
+}
+
+.shoot{
+  animation:shoot 1s linear forwards;
+}
+
+@keyframes shoot{
+  0%{transform:translate(-200px,-200px); opacity:1;}
+  100%{transform:translate(200px,200px); opacity:0;}
+}
+
+/* Corazón */
 .heart-container{
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%) scale(0);
-  opacity:0;
-  transition:all 0.6s ease;
-  z-index:2;
-  text-align:center;
-  pointer-events:none; /* No bloquea botones */
-}
-
-.heart-container::before{
-  content:"💙";
   font-size:120px;
-  display:block;
-}
-
-.heart-container img{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-60%);
-  width:75px;
-  height:75px;
-  border-radius:50%;
-  object-fit:cover;
-  border:3px solid white;
+  opacity:0;
+  transition:0.5s;
+  pointer-events:none;
 }
 
 .heart-container.show{
-  opacity:1;
   transform:translate(-50%,-50%) scale(1);
+  opacity:1;
 }
 
-/* ===== IMÁGENES CENTRALES ===== */
+/* Astronauta */
+.astronaut{
+  margin-top:40px;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+}
+
+.astronaut img{
+  width:120px;
+}
+
+.speech{
+  margin-top:15px;
+  background:white;
+  color:black;
+  padding:15px;
+  border-radius:15px;
+  max-width:250px;
+}
+
+/* Imagenes */
 .center-img{
   width:220px;
   margin:20px 0;
@@ -125,26 +142,7 @@ body{
   margin-bottom:20px;
 }
 
-/* ===== TEXTO FINAL ===== */
-h1{
-  font-size:26px;
-  margin-bottom:20px;
-}
-
-h2{
-  font-size:22px;
-  margin-top:20px;
-}
-
-/* ===== CORAZONES FLOTANDO ===== */
-#floatingHearts{
-  position:absolute;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  z-index:1;
-}
-
+/* Corazones flotando */
 .floating-heart{
   position:absolute;
   color:#00b4ff;
@@ -153,12 +151,6 @@ h2{
 }
 
 @keyframes floatUp{
-  from{
-    transform:translateY(100vh);
-    opacity:1;
-  }
-  to{
-    transform:translateY(-10vh);
-    opacity:0;
-  }
+  from{ transform:translateY(100vh); opacity:1;}
+  to{ transform:translateY(-10vh); opacity:0;}
 }
