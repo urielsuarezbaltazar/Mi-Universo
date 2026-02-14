@@ -1,112 +1,55 @@
-let musicStarted = false;
-let noClicked = false;
+let currentScene = 1;
 
-/* RESPUESTA INICIAL */
+const music = document.getElementById("bgMusic");
 
-function answer(val){
-  if(!val){
-    if(!noClicked){
-      document.getElementById("options").innerHTML =
-      '<button class="btn yes" onclick="answer(true)">Sí</button>';
-      noClicked = true;
-    }
-  } else {
-    startMusic();
-    changeScene(2);
-    launchStar();
-  }
+function answerNo(){
+  document.querySelector(".no").style.display = "none";
 }
 
-/* MÚSICA */
-
-function startMusic(){
-  if(!musicStarted){
-    const music = document.getElementById("bgMusic");
-    music.volume = 0;
-
-    music.play().then(()=>{
-      let fade = setInterval(()=>{
-        if(music.volume < 1){
-          music.volume += 0.05;
-        } else {
-          clearInterval(fade);
-        }
-      },100);
-    }).catch(()=>{});
-
-    musicStarted = true;
-  }
+function answerYes(){
+  music.play();
+  changeScene(2);
+  startAnimation();
 }
-
-/* CAMBIO DE ESCENA */
 
 function changeScene(num){
-  document.querySelectorAll(".scene").forEach(s => s.classList.remove("active"));
+  document.querySelector(".scene.active").classList.remove("active");
   document.getElementById("scene"+num).classList.add("active");
+  currentScene = num;
 }
-
-/* CONTROL DE ESCENAS */
 
 function nextScene(){
-  if(document.getElementById("scene2").classList.contains("active")){
-    changeScene(3);
-    createFloatingHearts();
-  }
-  else if(document.getElementById("scene3").classList.contains("active")){
-    changeScene(4);
-  }
-  else if(document.getElementById("scene4").classList.contains("active")){
-    changeScene(5);
+  if(currentScene < 5){
+    changeScene(currentScene + 1);
   }
 }
 
-/* ESTRELLA FUGAZ */
+/* Animación estrella + corazón */
+function startAnimation(){
+  const star = document.getElementById("shootingStar");
+  const heart = document.getElementById("impactHeart");
+  const astro = document.querySelector(".astronaut");
 
-function launchStar(){
-
-  const star = document.createElement("div");
-  star.className = "shooting-star";
-
-  star.style.left = Math.random() * window.innerWidth + "px";
-  star.style.top = "-10px";
-
-  document.body.appendChild(star);
-
-  star.animate([
-    { transform: "translate(0,0)" },
-    { transform: "translate(-400px,600px)" }
-  ], {
-    duration: 2000,
-    easing: "ease-in"
-  });
+  star.classList.add("shoot");
 
   setTimeout(()=>{
-    star.remove();
-
-    // Mostrar corazón azul
-    const heart = document.getElementById("impactHeart");
     heart.classList.add("show");
+  },1000);
 
-    // Mostrar astronauta
-    document.getElementById("astronaut").style.opacity = 1;
-
-  },2000);
+  setTimeout(()=>{
+    astro.style.display="flex";
+  },1500);
 }
 
-/* CORAZONES FLOTANDO ESCENA 3 */
-
-function createFloatingHearts(){
-  const container = document.getElementById("floatingHearts");
-
-  for(let i=0;i<20;i++){
+/* Corazones flotando escena 3 */
+setInterval(()=>{
+  if(currentScene === 3){
     const heart = document.createElement("div");
-    heart.textContent = "💙";
-    heart.style.left = Math.random()*100 + "%";
-    heart.style.animationDuration = (4 + Math.random()*4) + "s";
-    container.appendChild(heart);
+    heart.className="floating-heart";
+    heart.innerHTML="💙";
+    heart.style.left=Math.random()*100+"vw";
+    document.getElementById("floatingHearts").appendChild(heart);
 
-    setTimeout(()=>{
-      heart.remove();
-    },8000);
+    setTimeout(()=>{ heart.remove(); },5000);
   }
-}
+},500);
