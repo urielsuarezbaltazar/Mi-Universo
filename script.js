@@ -80,8 +80,6 @@ function createFloatingHearts(){
   }
 }
 
-/* Reiniciar historia */
-
 function restartStory(){
   currentScene=1;
   changeScene(1);
