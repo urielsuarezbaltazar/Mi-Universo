@@ -1,5 +1,6 @@
 let musicStarted=false;
 let noClicked=false;
+let currentScene=1;
 
 function answer(val){
   if(!val){
@@ -11,6 +12,7 @@ function answer(val){
   }else{
     startMusic();
     changeScene(2);
+    currentScene=2;
     launchStar();
   }
 }
@@ -38,16 +40,13 @@ function changeScene(num){
 }
 
 function nextScene(){
-  if(document.getElementById("scene2").classList.contains("active")){
-    changeScene(3);
+  currentScene++;
+
+  if(currentScene===4){
     createFloatingHearts();
   }
-  else if(document.getElementById("scene3").classList.contains("active")){
-    changeScene(5);
-  }
-  else{
-    changeScene(4);
-  }
+
+  changeScene(currentScene);
 }
 
 function launchStar(){
@@ -74,7 +73,7 @@ function createFloatingHearts(){
   const container=document.getElementById("floatingHearts");
   for(let i=0;i<25;i++){
     const heart=document.createElement("div");
-    heart.textContent="💙";
+    heart.textContent="💖";
     heart.style.left=Math.random()*100+"%";
     heart.style.animationDuration=(4+Math.random()*4)+"s";
     container.appendChild(heart);
