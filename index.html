@@ -3,53 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>San Valentín</title>
+<title>Mi Universo</title>
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="stars"></div>
-
-<audio id="bgMusic" loop>
+<audio id="bgMusic" loop preload="auto">
   <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
+<div class="stars"></div>
+
 <!-- ESCENA 1 -->
-<div class="scene active" id="scene1">
+<section class="scene active" id="scene1">
   <h1>¿Quieres ser mi San Valentín?</h1>
   <div id="options">
-    <button class="btn yes" onclick="answer(true)">Sí</button>
     <button class="btn no" onclick="answer(false)">No</button>
+    <button class="btn yes" onclick="answer(true)">Sí</button>
   </div>
-</div>
+</section>
 
 <!-- ESCENA 2 -->
-<div class="scene" id="scene2">
+<section class="scene" id="scene2">
+  <div id="starContainer"></div>
   <div id="impactHeart" class="impact-heart">❤️</div>
 
-  <div class="astronaut" id="astronaut">
+  <div id="astronaut" class="astronaut">
     <img src="astronauta.png">
-    <div class="speech">
-      poema
-    </div>
+    <div class="speech">POEMA</div>
   </div>
 
   <button class="btn next" onclick="nextScene()">Continuar</button>
-</div>
+</section>
 
 <!-- ESCENA 3 -->
-<div class="scene" id="scene3">
+<section class="scene" id="scene3">
   <div id="floatingHearts"></div>
   <img src="dibujo.png" class="center-img">
   <h2>Se juraron amor eterno</h2>
   <button class="btn next" onclick="nextScene()">Continuar</button>
-</div>
+</section>
 
 <!-- ESCENA 4 -->
-<div class="scene" id="scene4">
+<section class="scene" id="scene4">
   <img src="foto.jpg" class="final-img">
-  <h2>Al día de hoy esos dos siguen juntos.<br>Feliz San Valentín mi Universo 💖</h2>
-</div>
+  <h2>
+    Al día de hoy esos dos siguen juntos.<br>
+    Feliz San Valentín mi Universo
+  </h2>
+</section>
 
 <script src="script.js"></script>
 </body>
