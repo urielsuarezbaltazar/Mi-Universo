@@ -1,67 +1,144 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mi Universo</title>
-<link rel="stylesheet" href="style.css">
-</head>
+*{margin:0;padding:0;box-sizing:border-box}
 
-<body>
+body{
+  font-family: Arial, sans-serif;
+  background:black;
+  color:white;
+  overflow:hidden;
+}
 
-<audio id="bgMusic" loop preload="auto">
-  <source src="musica.mp3" type="audio/mpeg">
-</audio>
+/* ESCENAS */
+.scene{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  opacity:0;
+  transition:opacity 1s ease;
+  background:black; /* 🔥 evita fondo blanco */
+}
 
-<div class="stars"></div>
+.scene.active{
+  opacity:1;
+  z-index:2;
+}
 
-<!-- ESCENA 1 -->
-<section class="scene active" id="scene1">
-  <h1>¿Quieres ser mi San Valentín?</h1>
-  <div id="options">
-    <button class="btn no" onclick="answer(false)">No</button>
-    <button class="btn yes" onclick="answer(true)">Sí</button>
-  </div>
-</section>
+h1,h2{
+  margin-bottom:20px;
+}
 
-<!-- ESCENA 2 -->
-<section class="scene" id="scene2">
-  <div id="starContainer"></div>
-  <div id="impactHeart" class="impact-heart">💙</div>
+/* BOTONES */
+.btn{
+  padding:12px 25px;
+  margin:10px;
+  font-size:18px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  transition:0.3s;
+}
 
-  <div id="astronaut" class="astronaut">
-    <img src="astronauta.png">
-    <div class="speech">POEMA</div>
-  </div>
+.yes{background:#ff4d6d;color:white;}
+.no{background:#444;color:white;}
+.next{background:white;color:black;}
 
-  <button class="btn next" onclick="nextScene()">Continuar</button>
-</section>
+.btn:hover{
+  transform:scale(1.1);
+}
 
-<!-- ESCENA 3 -->
-<section class="scene" id="scene3">
-  <div id="floatingHearts"></div>
-  <img src="dibujo.png" class="center-img">
-  <h2>Se juraron amor eterno</h2>
-  <button class="btn next" onclick="nextScene()">Te Amo 💙</button>
-</section>
+/* FONDO ESTRELLAS */
+.stars{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:transparent;
+  overflow:hidden;
+  z-index:0;
+  pointer-events:none;
+}
 
-<!-- ESCENA 4 -->
-<section class="scene" id="scene4">
-  <img src="foto.jpg" class="final-img">
-  <h2>
-    Al día de hoy esos dos siguen juntos.<br>
-    Feliz San Valentín mi Universo
-  </h2>
-</section>
+.stars::before{
+  content:"";
+  position:absolute;
+  width:200%;
+  height:200%;
+  background:
+    radial-gradient(white 1px, transparent 1px);
+  background-size:40px 40px;
+  animation:moveStars 60s linear infinite;
+  opacity:0.4;
+}
 
-<!-- ESCENA 5 -->
-<section class="scene" id="scene5">
-  <img src="ositos.gif" class="gif-final">
-  <h2 class="mensaje-final">
-    Te amo mucho mi Yulissita 🤍
-  </h2>
-</section>
+@keyframes moveStars{
+  from{transform:translate(0,0);}
+  to{transform:translate(-50%, -50%);}
+}
 
-<script src="script.js"></script>
-</body>
-</html>
+/* ESTRELLA FUGAZ */
+.shooting-star{
+  position:absolute;
+  width:4px;
+  height:4px;
+  background:white;
+  border-radius:50%;
+  box-shadow:0 0 10px white;
+}
+
+/* CORAZÓN IMPACTO */
+.impact-heart{
+  font-size:60px;
+  opacity:0;
+  transition:1s;
+  color:#4da6ff;
+}
+
+.astronaut{
+  position:absolute;
+  bottom:10%;
+  left:5%;
+  opacity:0;
+  transition:1s;
+}
+
+.astronaut img{
+  width:120px;
+}
+
+.speech{
+  background:white;
+  color:black;
+  padding:10px;
+  border-radius:10px;
+  margin-top:10px;
+  width:200px;
+}
+
+/* CORAZONES FLOTANDO */
+#floatingHearts div{
+  position:absolute;
+  font-size:25px;
+  animation:float 6s linear infinite;
+  color:#4da6ff;
+}
+
+@keyframes float{
+  from{transform:translateY(100vh);}
+  to{transform:translateY(-10vh);}
+}
+
+.center-img{width:220px;margin:20px;}
+.final-img{width:250px;margin:20px;}
+
+/* ESCENA FINAL */
+.gif-final{
+  width:250px;
+  margin:20px;
+}
+
+.mensaje-final{
+  margin-top:20px;
+  font-size:22px;
+}
